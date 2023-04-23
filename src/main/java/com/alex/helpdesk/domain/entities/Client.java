@@ -8,7 +8,7 @@ import com.alex.helpdesk.domain.enums.Profile;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
-@Entity
+@Entity(name = "TB_CLIENT")
 public class Client extends Entities {
 	private static final long serialVersionUID = 1L;
 	

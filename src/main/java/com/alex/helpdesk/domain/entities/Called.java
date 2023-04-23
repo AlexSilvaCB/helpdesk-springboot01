@@ -23,10 +23,10 @@ public class Called implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMyyyy HH:mm:ss")
 	private Instant openDate = Instant.now();
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMyyyy HH:mm:ss")
 	private Instant closedate;
 	
 	private Priority priority;

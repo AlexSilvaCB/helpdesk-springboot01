@@ -39,7 +39,7 @@ public abstract class Entities implements Serializable {
 	@CollectionTable(name = "PROFILE")
 	protected Set<Integer> profiles = new HashSet<>();
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMyyyy HH:mm:ss")
 	protected Instant dataCreate = Instant.now();
 	
 	public Entities() {
