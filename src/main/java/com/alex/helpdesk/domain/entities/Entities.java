@@ -1,5 +1,6 @@
 package com.alex.helpdesk.domain.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -7,17 +8,38 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.alex.helpdesk.domain.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public abstract class Entities {
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity(name = "TB_ENTITIES")
+public abstract class Entities implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 	protected String name;
+	
+	@Column(unique = true)
 	protected String cpf;
+	
+	@Column(unique = true)
 	protected String email;
 	protected String password;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PROFILE")
 	protected Set<Integer> profiles = new HashSet<>();
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	protected Instant dataCreate = Instant.now();
 	
 	public Entities() {

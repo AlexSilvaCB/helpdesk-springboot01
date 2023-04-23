@@ -1,15 +1,32 @@
 package com.alex.helpdesk.domain.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
 import com.alex.helpdesk.domain.enums.Priority;
 import com.alex.helpdesk.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Called {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity(name = "TB_CALLED")
+public class Called implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Instant openDate = Instant.now();
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Instant closedate;
 	
 	private Priority priority;
@@ -18,7 +35,12 @@ public class Called {
 	private String title;
 	private String comments;
 	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name = "technical_id")
 	private Technical technical;
 	
 	public Called() {
