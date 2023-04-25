@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.alex.helpdesk.domain.entities.Technical;
 import com.alex.helpdesk.repositories.TechnicalRepository;
+import com.alex.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TechnicalService {
@@ -19,7 +20,7 @@ public class TechnicalService {
 	
 	public Technical findById(Long id) {	
 		Optional<Technical> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! id: " + id));
 	}
 	
 	public List<Technical> findAll() {
