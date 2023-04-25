@@ -27,4 +27,6 @@ public class TechnicalService {
 		return repository.findAll();
 	}
 	
+	
+	
 }
