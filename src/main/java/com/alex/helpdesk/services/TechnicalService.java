@@ -7,6 +7,7 @@ import java.lang.Long;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alex.helpdesk.domain.dto.TechnicalDTO;
 import com.alex.helpdesk.domain.entities.Technical;
 import com.alex.helpdesk.repositories.TechnicalRepository;
 import com.alex.helpdesk.services.exceptions.ObjectNotFoundException;
@@ -25,6 +26,13 @@ public class TechnicalService {
 	
 	public List<Technical> findAll() {
 		return repository.findAll();
+	}
+
+	
+	public Technical create(TechnicalDTO objDTO) {
+			objDTO.setId(null);
+			Technical newObj = new Technical(objDTO);
+			return repository.save(newObj);
 	}
 	
 	
