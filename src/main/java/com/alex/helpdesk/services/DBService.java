@@ -12,17 +12,13 @@ import com.alex.helpdesk.domain.enums.Priority;
 import com.alex.helpdesk.domain.enums.Profile;
 import com.alex.helpdesk.domain.enums.Status;
 import com.alex.helpdesk.repositories.CalledRepository;
-import com.alex.helpdesk.repositories.ClientRepository;
-import com.alex.helpdesk.repositories.TechnicalRepository;
+import com.alex.helpdesk.repositories.EntitiesRepository;
 
 @Service
 public class DBService {
 
 	@Autowired
-	private ClientRepository clRepository;
-	
-	@Autowired
-	private TechnicalRepository tRepository;
+	private EntitiesRepository eRepository;
 	
 	@Autowired
 	private CalledRepository calRepository;
@@ -50,8 +46,7 @@ public class DBService {
 		Called c5 = new Called(null, Priority.AVERAGE, Status.PROGRESS, "Chamado 5", "Teste chamado 5", cli1, tec2);
 		Called c6 = new Called(null, Priority.LOW, Status.CLOSED, "Chamado 6", "Teste chamado 6", cli5, tec5);
 		
-		clRepository.saveAll(Arrays.asList(cli1, cli2, cli3, cli4, cli5));
-		tRepository.saveAll(Arrays.asList(tec1, tec2, tec3, tec4, tec5));
+		eRepository.saveAll(Arrays.asList(tec1, tec2, tec3, tec4, tec5, cli1, cli2, cli3, cli4, cli5));
 		calRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
 		
 	}

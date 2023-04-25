@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.lang.Long;
 
 import com.alex.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,6 +19,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 
 @Entity(name = "TB_ENTITIES")
 public abstract class Entities implements Serializable {
@@ -39,7 +41,7 @@ public abstract class Entities implements Serializable {
 	@CollectionTable(name = "PROFILE")
 	protected Set<Integer> profiles = new HashSet<>();
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMyyyy HH:mm:ss")
+	@JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="America/Sao_Paulo")
 	protected Instant dataCreate = Instant.now();
 	
 	public Entities() {

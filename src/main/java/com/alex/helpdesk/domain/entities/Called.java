@@ -3,6 +3,7 @@ package com.alex.helpdesk.domain.entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import java.lang.Long;
 
 import com.alex.helpdesk.domain.enums.Priority;
 import com.alex.helpdesk.domain.enums.Status;
@@ -23,10 +24,10 @@ public class Called implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMyyyy HH:mm:ss")
+	@JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="America/Sao_Paulo")
 	private Instant openDate = Instant.now();
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMyyyy HH:mm:ss")
+	@JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="America/Sao_Paulo")
 	private Instant closedate;
 	
 	private Priority priority;
