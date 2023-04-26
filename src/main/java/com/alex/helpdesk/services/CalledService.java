@@ -1,5 +1,6 @@
 package com.alex.helpdesk.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class CalledService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! id: " + id));
 	}
 	
-	
+	public List<Called> findAll() {
+		return calledRepository.findAll();
+	}
 	
 }
