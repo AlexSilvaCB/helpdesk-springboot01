@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import java.lang.Long;
 
 import com.alex.helpdesk.domain.enums.Profile;
@@ -30,6 +33,7 @@ public abstract class Entities implements Serializable {
 	protected Long id;
 	protected String name;
 	
+	@CPF
 	@Column(unique = true)
 	protected String cpf;
 	

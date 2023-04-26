@@ -15,6 +15,8 @@ import com.alex.helpdesk.repositories.EntitiesRepository;
 import com.alex.helpdesk.repositories.TechnicalRepository;
 import com.alex.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TechnicalService {
 	
@@ -36,11 +38,20 @@ public class TechnicalService {
 
 	
 	public Technical create(TechnicalDTO objDTO) {
-			objDTO.setId(null);
-			validCpfEmail(objDTO);
-			Technical newObj = new Technical(objDTO);
-			return repository.save(newObj);
+		objDTO.setId(null);
+		validCpfEmail(objDTO);
+		Technical newObj = new Technical(objDTO);
+		return repository.save(newObj);
 	}
+	
+	public Technical update(Long id, @Valid TechnicalDTO objDTO) {
+		objDTO.setId(id);
+		Technical oldObj = findById(id);
+		validCpfEmail(objDTO);
+		oldObj = new Technical(objDTO);
+		return repository.save(oldObj);
+	}
+	
 
 	private void validCpfEmail(TechnicalDTO objDTO) {
 		Optional<Entities> obj = enRepository.findByCpf(objDTO.getCpf());
@@ -51,8 +62,32 @@ public class TechnicalService {
 			obj = enRepository.findByEmail(objDTO.getEmail());
 			if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 				throw new DataIntegrityViolationException("Email already registered in the system");
-			}
+			}	
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
