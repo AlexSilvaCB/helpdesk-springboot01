@@ -10,13 +10,19 @@ import com.alex.helpdesk.domain.entities.Technical;
 import com.alex.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class TechnicalDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	protected Long id;
+	@NotNull(message = "The NAME field is required")
 	protected String name;
-	protected String cpf;	
+	@NotNull(message = "The CPF field is required")
+	protected String cpf;
+	@NotNull(message = "The EMAIL field is required")
 	protected String email;
+	@NotNull(message = "The PASSWORD field is required")
 	protected String password;
 	protected Set<Integer> profiles = new HashSet<>();
 	

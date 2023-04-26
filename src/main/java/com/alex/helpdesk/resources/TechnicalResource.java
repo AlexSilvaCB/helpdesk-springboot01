@@ -1,5 +1,9 @@
 package com.alex.helpdesk.resources;
 
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.lang.Long;
-import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.alex.helpdesk.domain.dto.TechnicalDTO;
 import com.alex.helpdesk.domain.entities.Technical;
 import com.alex.helpdesk.services.TechnicalService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/technical")
@@ -40,7 +41,7 @@ public class TechnicalResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TechnicalDTO> create(@RequestBody TechnicalDTO objDTO) {
+	public ResponseEntity<TechnicalDTO> create(@Valid @RequestBody TechnicalDTO objDTO) {
 		Technical newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
