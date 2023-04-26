@@ -1,5 +1,6 @@
 package com.alex.helpdesk.services;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,13 @@ public class CalledService {
 	public Called create(@Valid CalledDTO objDTO) {
 		return calledRepository.save(newCalled(objDTO));
 	}
+	
+	public Called update(Long id, @Valid CalledDTO objDTO) {
+		objDTO.setId(id);
+		Called oldObj = findById(id);
+		oldObj = newCalled(objDTO);
+		return calledRepository.save(oldObj);
+		}
 
 	
 	private Called newCalled(CalledDTO obj) {
@@ -53,6 +61,10 @@ public class CalledService {
 			called.setId(obj.getId());
 		}
 		
+		if(obj.getStatus().equals(3)) {
+			called.setClosedate(Instant.now());
+		}
+		
 		called.setTechnical(technical);
 		called.setClient(client);
 		called.setPriority(Priority.toEnum(obj.getPriority()));
@@ -62,11 +74,12 @@ public class CalledService {
 		return called;
 		
 	}
+
 	
 	
 	
 	
 	
-	
+
 	
 }
