@@ -52,6 +52,16 @@ public class TechnicalService {
 		return repository.save(oldObj);
 	}
 	
+	public void delete(Long id) {
+			Technical obj = findById(id);
+			if(obj.getCalleds().size() > 0) {
+				throw new DataIntegrityViolationException("Technician has work orders and cannot be deleted!");
+			}else {
+				repository.deleteById(id);
+			}
+			
+		}
+	
 
 	private void validCpfEmail(TechnicalDTO objDTO) {
 		Optional<Entities> obj = enRepository.findByCpf(objDTO.getCpf());
@@ -65,30 +75,4 @@ public class TechnicalService {
 			}	
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
