@@ -6,6 +6,8 @@ import java.time.Instant;
 import com.alex.helpdesk.domain.entities.Called;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class CalledDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -17,14 +19,17 @@ public class CalledDTO implements Serializable{
 	@JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="America/Sao_Paulo")
 	private Instant closedate;
 	
+	@NotNull(message = "The PRIORITY field is required")
 	private Integer priority;
+	@NotNull(message = "The NAME field is required")
 	private Integer status;
-	
+	@NotNull(message = "The TITLE field is required")
 	private String title;
+	@NotNull(message = "The COMMENTS field is required")
 	private String comments;
-	
+	@NotNull(message = "The CLIENT field is required")
 	private Long client;
-	
+	@NotNull(message = "The TECHNICAL field is required")
 	private Long technical;
 	
 	private String nameClient;
